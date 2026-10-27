@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "yams-nano"
+version = "0.1.0"
+description = "Local, project-aware memory for coding agents over stdio MCP"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=1.20,<2",
+  "numpy>=1.26,<3",
+  "pydantic>=2.11,<3",
+  "huggingface-hub>=0.34,<1",
+  "sentence-transformers>=5.1,<6",
+  "transformers>=4.57,<5",
+  "torch>=2.8,<3",
+  "peft>=0.15.2,<1",
+]
+
+[project.scripts]
+yams-nano = "yams_nano.server:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["model: downloads and runs the real Jina model (opt in with YAMS_TEST_MODEL=1)"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
